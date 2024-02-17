@@ -17,11 +17,6 @@ jobs:
       with: 
         fetch-depth: 0
     
-    - name: set git config
-      run: |
-        git config --global user.email "${{ secrets.USER_EMAIL }}"
-        git config --global user.name "${{ secrets.USER_NAME }}" //配置 git 用户和邮箱
-    
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh/
@@ -35,10 +30,6 @@ jobs:
         git remote add origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@target-git-server.com/${{ secrets.USER_NAME }}/repo.git
         git push origin main //默认 push mian分支
 ```
-
-`${{ secrets.USER_EMAIL }}` 为用户邮箱
-
-`${{ secrets.USER_NAME }}` 为用户名
 
 `${{ secrets.SSH_PRIVATE_KEY }}` 为 ssh 私钥，需要在本地电脑上用 `ssh-keygen` 命令生成，并把私钥上传到仓库 `Setting - Secrets and variables - Actions - Repository secrets` 下，并命名为 `SSH_PRIVATE_KEY`，然后把公钥添加到你目标 git 服务器里
 

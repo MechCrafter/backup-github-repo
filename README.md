@@ -1,5 +1,11 @@
 这是一个备份 GitHub 仓库的 GitHub Action 动作，默认在 push 时触发，可以把你的 GitHub 仓库备份到其它 git 服务器，如 gitee、gitea、gitlab 等
 
+用了几次发现有问题，如果在 GitHub 仓库用了 `git push -f` 命令的话，那这个 action 动作就会运行失败，如果把最后一行的 `git push origin mian` 改成 `git push -f origin mian` 的话也会运行失败，而且用强制推送太不稳妥了，所以不建议用 `git push -f` 命令推送文件到 GitHub 仓库
+
+还有一个问题是 GitHub 是支持 `git lfs` 的，所以你的目标 Git 服务器也要开启 `git lfs`，gitee 没有 `git lfs` 服务，如果你想备份到 gitee 的话就不能开 `git lfs`
+
+由于要把你其它 Git 服务器登录账号密码、ssh 私钥放到 GitHub 服务器里，so 祈祷微软大法好吧，保佑不会有黑客攻击微软服务器并且攻击成功（/doge）
+
 **配置说明**
 
 ```yml
